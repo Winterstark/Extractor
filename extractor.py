@@ -1,8 +1,8 @@
-#set your 7-Zip exe path here::
-SZIP = ""
+#set your 7-Zip's exe path here:
+SZIP = "C:\\util\\7zip\\7zG.exe"
 
 #if the archive contains at least this many files or
-#folders then extract them into a new folder::
+#folders then extract them into a new folder:
 NEW_DIR_LIMIT = 5
 
 
@@ -38,10 +38,14 @@ if len(files) < NEW_DIR_LIMIT:
     #delete new dir
     shutil.rmtree(new_dir)
 
-#send archive to bin
+#send archive to recycle bin
 shell.SHFileOperation((0, shellcon.FO_DELETE, path, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
 
 #check if archive has multiple files; delete them too
 if ".rar" in path:
     for file in glob.glob(path.replace(".rar", ".r*")):
         shell.SHFileOperation((0, shellcon.FO_DELETE, file, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
+
+    if "part1" in path:
+        for file in glob.glob(path.replace(".part1", ".part*")):
+            shell.SHFileOperation((0, shellcon.FO_DELETE, file, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
