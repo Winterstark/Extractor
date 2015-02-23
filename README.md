@@ -15,15 +15,20 @@ Extractor fixes these problems by checking how many files are in an archive and 
 
 Usage
 ------
+Besides Python, you need to install [Python for Windows Extensions](http://sourceforge.net/projects/pywin32/).
+
 Before using the script you need to edit it to set your 7-Zip's (or other extracting software's) exe path.
 
 You can also specify the number of files in an archive that will trigger the creation of a new directory. The default is 5.
 
 To run the script call it with the archive's path as the argument. Because this isn't very user-friendly, you should set this script to be the default program for .zips, .rars, etc. You can download registry entries that accomplish that here: [download registry entries](https://github.com/Winterstark/Extractor/tree/master/file%20association%20registry%20entries)
 
-To use the registry entries first run "reg_app_extractor.reg" to create a class for the Extractor filetype, and then run any or all of the other entries — each associates the Extractor class with a filetype (7z/rar/zip). These entries are very simple and can easily be edited to associate any other filetype you may need.
+Before running the registry entries you need to edit "reg_app_extractor.reg" and replace the file paths with your own for:
+* The icon you want to use
+* Your Python.exe path
+* Location of the Extractor.py script
 
-
+First run "reg_app_extractor.reg" to create a class for the Extractor filetype, and then run any or all of the other entries â€” each associates the Extractor class with a filetype (7z/rar/zip). These entries are very simple and can easily be edited to associate any other filetype you may need.
 
 
 Notes
