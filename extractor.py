@@ -1,5 +1,5 @@
 #set your 7-Zip's exe path here:
-SZIP = "C:\\util\\7zip\\7zG.exe"
+SZIP = "C:\\util\\7-Zip\\7zG.exe"
 
 #if the archive contains at least this many files or
 #folders then extract them into a new folder:
@@ -11,7 +11,7 @@ import subprocess
 import shutil
 import os
 import glob
-from win32com.shell import shell, shellcon
+from send2trash import send2trash
 
 
 path = sys.argv[1]
@@ -39,13 +39,13 @@ if len(files) < NEW_DIR_LIMIT:
     shutil.rmtree(new_dir)
 
 #send archive to recycle bin
-shell.SHFileOperation((0, shellcon.FO_DELETE, path, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
+send2trash(path)
 
 #check if archive has multiple files; delete them too
 if ".rar" in path:
     for file in glob.glob(path.replace(".rar", ".r*")):
-        shell.SHFileOperation((0, shellcon.FO_DELETE, file, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
+        send2trash(file)
 
     if "part1" in path:
         for file in glob.glob(path.replace(".part1", ".part*")):
-            shell.SHFileOperation((0, shellcon.FO_DELETE, file, None, shellcon.FOF_ALLOWUNDO | shellcon.FOF_NOCONFIRMATION, None, None))
+            send2trash(file)
